@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ModernNav } from './components/ModernNav';
-import { ModernHero } from './components/ModernHero';
-import { PatentsAndEducation } from './components/PatentsAndEducation';
-import { ResearchPillars } from './components/ResearchPillars';
-import { PublicationsList } from './components/PublicationsList';
-import { IndustryProjects } from './components/IndustryProjects';
-import { ConferencesAndAwards } from './components/ConferencesAndAwards';
-import { InteractiveLab } from './components/InteractiveLab';
+import { About } from './components/About';
+import { Publications } from './components/Publications';
+import { Projects } from './components/Projects';
+import { TalksAndAwards } from './components/TalksAndAwards';
+import { Education } from './components/Education';
+import { Section } from './components/Section';
+import { ResearchSurvey } from './components/ResearchSurvey';
 import { ModernFooter } from './components/ModernFooter';
 import { ChevronUp } from 'lucide-react';
-import { DesignSystemSummaryModal } from './components/DesignSystemSummaryModal';
 import { useT } from './i18n';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('overview');
-  const [showSpecsModal, setShowSpecsModal] = useState<boolean>(false);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
   const t = useT();
 
@@ -56,38 +54,18 @@ export default function App() {
       <ModernNav
         activeSection={activeSection}
         onNavigate={handleNavigate}
-        onOpenSpecsModal={() => setShowSpecsModal(true)}
       />
 
-      {/* 2. Main Content Canvas */}
-      <main className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex-1 py-4">
-
-        {/* 1) 소개 Hero Section */}
-        <ModernHero
-          onExplorePublications={() => handleNavigate('publications')}
-          onExploreIndustry={() => handleNavigate('industry')}
-          onExploreConferences={() => handleNavigate('conferences')}
-          onExplorePatents={() => handleNavigate('patents-bio')}
-        />
-
-        {/* 2) 소개 바로 다음: 학력 및 특허 (Patents, Academic Background & Languages) */}
-        <PatentsAndEducation />
-
-        {/* 3) 연구 분야 (3 Core Research Pillars) */}
-        <ResearchPillars />
-
-        {/* 4) 학술 논문 목록 (Publications List) */}
-        <PublicationsList />
-
-        {/* 5) 산학협력 프로젝트 (Industry Projects) */}
-        <IndustryProjects />
-
-        {/* 6) 학술발표 & 수상 내역 (Conferences & Awards) */}
-        <ConferencesAndAwards />
-
-        {/* 7) 체험 랩 (Interactive Lab - 연락하기 바로 직전 위치) */}
-        <InteractiveLab />
-
+      {/* 2. Main content: one column, one section style */}
+      <main className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex-1">
+        <About />
+        <Publications />
+        <Projects />
+        <TalksAndAwards />
+        <Education />
+        <Section id="survey" title={t('짧은 연구 설문', 'Quick Research Survey')}>
+          <ResearchSurvey />
+        </Section>
       </main>
 
       {/* Floating Back to Top Button */}
@@ -105,13 +83,8 @@ export default function App() {
       )}
 
       {/* 3. Modern Footer */}
-      <ModernFooter onOpenDesignSpecs={() => setShowSpecsModal(true)} />
+      <ModernFooter />
 
-      {/* Design System Specifications Modal */}
-      <DesignSystemSummaryModal
-        isOpen={showSpecsModal}
-        onClose={() => setShowSpecsModal(false)}
-      />
     </div>
   );
 }
