@@ -10,6 +10,7 @@ import { InteractiveLab } from './components/InteractiveLab';
 import { ModernFooter } from './components/ModernFooter';
 import { ChevronUp } from 'lucide-react';
 import { DesignSystemSummaryModal } from './components/DesignSystemSummaryModal';
+import { useT } from './i18n';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('overview');
@@ -17,6 +18,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [showSpecsModal, setShowSpecsModal] = useState<boolean>(false);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
+  const t = useT();
 
   // Clean Web Audio feedback
   const playClickSound = (freq = 880, duration = 0.04) => {
@@ -142,7 +144,8 @@ export default function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-zinc-900 hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-all duration-200 border border-zinc-700"
-          title="맨 위로 이동"
+          title={t('맨 위로 이동', 'Back to top')}
+          aria-label={t('맨 위로 이동', 'Back to top')}
         >
           <ChevronUp className="w-6 h-6" />
         </button>

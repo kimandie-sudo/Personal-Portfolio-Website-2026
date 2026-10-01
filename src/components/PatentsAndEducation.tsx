@@ -1,8 +1,10 @@
 import React from 'react';
 import { ShieldCheck, GraduationCap, Languages, Sparkles, CheckCircle2 } from 'lucide-react';
-import { PATENTS, EDUCATION, LANGUAGES } from '../data/portfolioData';
+import { usePortfolioData, useT } from '../i18n';
 
 export const PatentsAndEducation: React.FC = () => {
+  const { PATENTS, EDUCATION, LANGUAGES } = usePortfolioData();
+  const t = useT();
   return (
     <section id="patents-bio-section" className="w-full mb-12 scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -14,7 +16,7 @@ export const PatentsAndEducation: React.FC = () => {
             <span>ACADEMIC BACKGROUND & GLOBAL COMPETENCY</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mb-6">
-            학력 및 글로벌 역량 (Academic Background & Languages)
+            {t('학력 및 글로벌 역량 (Academic Background & Languages)', 'Academic Background & Languages')}
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -25,7 +27,7 @@ export const PatentsAndEducation: React.FC = () => {
                 <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
                   <GraduationCap className="w-4 h-4 text-blue-600" />
                   <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                    학력 (Education)
+                    {t('학력 (Education)', 'Education')}
                   </h3>
                 </div>
 
@@ -70,7 +72,7 @@ export const PatentsAndEducation: React.FC = () => {
                 <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
                   <Languages className="w-4 h-4 text-blue-600" />
                   <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                    글로벌 어학 역량 (Global Languages)
+                    {t('글로벌 어학 역량 (Global Languages)', 'Global Languages')}
                   </h3>
                 </div>
 
@@ -94,21 +96,21 @@ export const PatentsAndEducation: React.FC = () => {
                 <div className="flex items-center gap-2 mb-3 pb-2 border-b border-blue-200/60">
                   <Sparkles className="w-4 h-4 text-blue-600" />
                   <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wide">
-                    핵심 연구 방법론 & 분석 도구
+                    {t('핵심 연구 방법론 & 분석 도구', 'Core Research Methods & Analytical Tools')}
                   </h3>
                 </div>
                 <div className="space-y-2 text-xs text-zinc-700 leading-relaxed">
                   <div className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>생체신호 계측:</strong> Tobii Pro Glasses 3 시선 추적, Artinis OctaMon+ fNIRS 뇌혈류 분석, HRV 심박변이도</span>
+                    <span><strong>{t('생체신호 계측:', 'Physiological Sensing:')}</strong> {t('Tobii Pro Glasses 3 시선 추적, Artinis OctaMon+ fNIRS 뇌혈류 분석, HRV 심박변이도', 'Tobii Pro Glasses 3 eye tracking, Artinis OctaMon+ fNIRS cerebral hemodynamics, HRV (heart rate variability)')}</span>
                   </div>
                   <div className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>통계 모델링:</strong> R / Python 기반 선형혼합모형(LMER), Repeated Measures ANOVA, 시계열 평활화</span>
+                    <span><strong>{t('통계 모델링:', 'Statistical Modeling:')}</strong> {t('R / Python 기반 선형혼합모형(LMER), Repeated Measures ANOVA, 시계열 평활화', 'Linear mixed-effects models (LMER), repeated-measures ANOVA, and time-series smoothing in R / Python')}</span>
                   </div>
                   <div className="flex items-start gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>인공지능 & UX:</strong> Multi-Agent LLM 오케스트레이션, SHAP/LIME 설명가능 AI(XAI)</span>
+                    <span><strong>{t('인공지능 & UX:', 'AI & UX:')}</strong> {t('Multi-Agent LLM 오케스트레이션, SHAP/LIME 설명가능 AI(XAI)', 'Multi-agent LLM orchestration, SHAP/LIME explainable AI (XAI)')}</span>
                   </div>
                 </div>
               </div>
@@ -125,7 +127,7 @@ export const PatentsAndEducation: React.FC = () => {
             <span>PATENTS & INTELLECTUAL PROPERTY</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mb-6">
-            특허 출원 실적 (총 2건)
+            {t(`특허 출원 실적 (총 ${PATENTS.length}건)`, `Patent Applications (${PATENTS.length} total)`)}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -150,7 +152,7 @@ export const PatentsAndEducation: React.FC = () => {
                   </h4>
 
                   <p className="text-xs font-semibold text-blue-700 mb-3">
-                    기술 분야: {p.field}
+                    {t('기술 분야', 'Field')}: {p.field}
                   </p>
 
                   <p className="text-xs text-zinc-700 leading-relaxed bg-zinc-50 p-3.5 rounded-xl border border-zinc-200/80 mb-4">
@@ -159,8 +161,8 @@ export const PatentsAndEducation: React.FC = () => {
                 </div>
 
                 <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-500 font-mono">
-                  <span>출원인: {p.applicant}</span>
-                  <span className="text-blue-600 font-bold font-sans">인간공학 진단 인터페이스</span>
+                  <span>{t('출원인', 'Applicant')}: {p.applicant}</span>
+                  <span className="text-blue-600 font-bold font-sans">{t('인간공학 진단 인터페이스', 'Ergonomic Diagnostic Interface')}</span>
                 </div>
               </div>
             ))}

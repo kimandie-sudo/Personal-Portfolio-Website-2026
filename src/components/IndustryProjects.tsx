@@ -11,56 +11,58 @@ import {
   Building2,
   Calendar
 } from 'lucide-react';
-import { INDUSTRY_PROJECTS } from '../data/portfolioData';
+import { usePortfolioData, useT } from '../i18n';
 
 interface IndustryProjectsProps {
   filterQuery?: string;
 }
 
 export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery = '' }) => {
+  const { INDUSTRY_PROJECTS } = usePortfolioData();
+  const t = useT();
   const [partnerFilter, setPartnerFilter] = useState<'ALL' | 'Samsung' | 'Hyundai' | 'National'>('ALL');
   const [activeAgentDemo, setActiveAgentDemo] = useState<number>(0);
 
   const agentsList = [
     { 
       name: '1. Context Inference Agent', 
-      role: 'UI 스크린샷 계층 및 앱 도메인 맥락 자동 파악', 
-      desc: '스크린샷 상의 헤더, 네비게이션, 본문 영역을 분할 인식하고 현재 사용자 인터랙션 맥락을 추론합니다.' 
+      role: t('UI 스크린샷 계층 및 앱 도메인 맥락 자동 파악', 'Automatically identifies UI screenshot hierarchy and app-domain context'), 
+      desc: t('스크린샷 상의 헤더, 네비게이션, 본문 영역을 분할 인식하고 현재 사용자 인터랙션 맥락을 추론합니다.', 'Segments the header, navigation, and content regions of a screenshot and infers the current user-interaction context.') 
     },
     { 
       name: '2. Info Architecture Agent', 
-      role: '네비게이션 계층 및 메뉴 인지 부하 평가', 
-      desc: 'Hick-Hyman Law에 기반하여 메뉴 뎁스와 선택지 복잡도를 계산하고 길찾기 난이도를 진단합니다.' 
+      role: t('네비게이션 계층 및 메뉴 인지 부하 평가', 'Evaluates navigation hierarchy and menu cognitive load'), 
+      desc: t('Hick-Hyman Law에 기반하여 메뉴 뎁스와 선택지 복잡도를 계산하고 길찾기 난이도를 진단합니다.', 'Computes menu depth and choice complexity based on the Hick-Hyman Law to diagnose wayfinding difficulty.') 
     },
     { 
       name: '3. Accessibility Agent', 
-      role: 'WCAG 명도 대비, 터치 타겟(44px), 가독성 검증', 
-      desc: '텍스트-배경 대비비 4.5:1 준수 여부 및 최소 인터랙션 터치 영역(44x44px)을 픽셀 단위로 전수 검사합니다.' 
+      role: t('WCAG 명도 대비, 터치 타겟(44px), 가독성 검증', 'Verifies WCAG contrast, touch targets (44px), and legibility'), 
+      desc: t('텍스트-배경 대비비 4.5:1 준수 여부 및 최소 인터랙션 터치 영역(44x44px)을 픽셀 단위로 전수 검사합니다.', 'Exhaustively checks, at the pixel level, 4.5:1 text-to-background contrast compliance and minimum touch-target size (44x44px).') 
     },
     { 
       name: '4. Error Prevention Agent', 
-      role: '파괴적 동작 방어 및 취소 가역성 확인', 
-      desc: '삭제, 결제 등 비가역적 동작 전 확인 팝업 및 Undo/취소 인터랙션 지원 여부를 검증합니다.' 
+      role: t('파괴적 동작 방어 및 취소 가역성 확인', 'Guards against destructive actions and checks reversibility'), 
+      desc: t('삭제, 결제 등 비가역적 동작 전 확인 팝업 및 Undo/취소 인터랙션 지원 여부를 검증합니다.', 'Verifies that irreversible actions such as deletion or payment are preceded by confirmation dialogs and support undo/cancel interactions.') 
     },
     { 
       name: '5. Consistency Agent', 
-      role: '디자인 시스템 토큰 및 용어 일관성 심사', 
-      desc: '동일 앱 내 아이콘 의미 통일성, 버튼 스타일 일관성, 용어 통일성 위반 사례를 자동 검출합니다.' 
+      role: t('디자인 시스템 토큰 및 용어 일관성 심사', 'Audits design-system token and terminology consistency'), 
+      desc: t('동일 앱 내 아이콘 의미 통일성, 버튼 스타일 일관성, 용어 통일성 위반 사례를 자동 검출합니다.', 'Automatically detects inconsistencies in icon semantics, button styles, and terminology within the same app.') 
     },
     { 
       name: '6. Feedback Loop Agent', 
-      role: '로딩/성공/경고 인터랙션 상태 피드백 진단', 
-      desc: '시스템 상태 가시성(Nielsen Norman #1)에 의거하여 작업 진행 상황 알림 유무를 심사합니다.' 
+      role: t('로딩/성공/경고 인터랙션 상태 피드백 진단', 'Diagnoses loading/success/warning state feedback'), 
+      desc: t('시스템 상태 가시성(Nielsen Norman #1)에 의거하여 작업 진행 상황 알림 유무를 심사합니다.', 'Assesses whether task progress is communicated, based on visibility of system status (Nielsen Norman heuristic #1).') 
     },
     { 
       name: '7. Cognitive Load Agent', 
-      role: '정보 밀도 및 인지 과부하(Cognitive Load) 측정', 
-      desc: '화면 내 정보 밀집도와 시각적 노이즈를 정량화하여 사용자의 순간적 인지 부담을 산출합니다.' 
+      role: t('정보 밀도 및 인지 과부하(Cognitive Load) 측정', 'Measures information density and cognitive overload'), 
+      desc: t('화면 내 정보 밀집도와 시각적 노이즈를 정량화하여 사용자의 순간적 인지 부담을 산출합니다.', 'Quantifies on-screen information density and visual noise to estimate the momentary cognitive burden on users.') 
     },
     { 
       name: '8. Synthesis & Report Agent', 
-      role: '우선순위화된 UX 개선 리포트 자동 생성', 
-      desc: '7개 전문 에이전트의 진단 결과를 심각도(Severity 1~4)별로 종합 집계하고 최적 개선안 리포트를 생성합니다.' 
+      role: t('우선순위화된 UX 개선 리포트 자동 생성', 'Automatically generates a prioritized UX improvement report'), 
+      desc: t('7개 전문 에이전트의 진단 결과를 심각도(Severity 1~4)별로 종합 집계하고 최적 개선안 리포트를 생성합니다.', 'Aggregates the findings of the seven specialist agents by severity (1–4) and generates a report with optimal improvement recommendations.') 
     }
   ];
 
@@ -78,6 +80,8 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
     return true;
   });
 
+  const countByPartner = (cat: string) => INDUSTRY_PROJECTS.filter((p) => p.partnerCategory === cat).length;
+
   return (
     <section id="industry-section" className="w-full mb-12 scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-7xl mx-auto">
@@ -90,20 +94,20 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
               <span>INDUSTRY-ACADEMIA COLLABORATIONS & NATIONAL RESEARCH GRANTS</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
-              산학 협력 및 국책 실증 프로젝트 (총 10건)
+              {t(`산학 협력 및 국책 실증 프로젝트 (총 ${INDUSTRY_PROJECTS.length}건)`, `Industry Collaborations & National Research Projects (${INDUSTRY_PROJECTS.length} total)`)}
             </h2>
             <p className="text-sm text-zinc-600 mt-1 max-w-3xl">
-              삼성전자(CXI/MX/Display/DA), 현대자동차그룹(남양연구소/현대모비스), 과기정통부(IITP), 한국연구재단(NRF)과 함께 산업 현장의 핵심 문제를 해결한 산학 실증 프로젝트 목록입니다.
+              {t('삼성전자(CXI/MX/Display/DA), 현대자동차그룹(남양연구소/현대모비스), 과기정통부(IITP), 한국연구재단(NRF)과 함께 산업 현장의 핵심 문제를 해결한 산학 실증 프로젝트 목록입니다.', 'Applied research projects addressing real-world industry challenges in partnership with Samsung Electronics (CXI/MX/Display/DA), Hyundai Motor Group (Namyang R&D Center/Hyundai Mobis), MSIT (IITP), and the National Research Foundation of Korea (NRF).')}
             </p>
           </div>
 
           {/* Partner Category Filter Chips */}
           <div className="flex flex-wrap items-center gap-1.5 bg-zinc-100 p-1 rounded-xl border border-zinc-200 self-start sm:self-auto shrink-0">
             {[
-              { id: 'ALL', label: '전체 (10)' },
-              { id: 'Samsung', label: '삼성전자 그룹 (5)' },
-              { id: 'Hyundai', label: '현대자동차그룹 (3)' },
-              { id: 'National', label: '정부 국책과제 (2)' },
+              { id: 'ALL', label: t(`전체 (${INDUSTRY_PROJECTS.length})`, `All (${INDUSTRY_PROJECTS.length})`) },
+              { id: 'Samsung', label: t(`삼성전자 그룹 (${countByPartner('Samsung')})`, `Samsung Electronics (${countByPartner('Samsung')})`) },
+              { id: 'Hyundai', label: t(`현대자동차그룹 (${countByPartner('Hyundai')})`, `Hyundai Motor Group (${countByPartner('Hyundai')})`) },
+              { id: 'National', label: t(`정부 국책과제 (${countByPartner('National')})`, `Government R&D (${countByPartner('National')})`) },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -131,7 +135,7 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
                 FEATURED RESEARCH (2025 – PRESENT)
               </span>
               <span className="text-xs font-bold text-amber-400">
-                삼성전자 CXI 팀 산학협력
+                {t('삼성전자 CXI 팀 산학협력', 'Samsung Electronics CXI Team Collaboration')}
               </span>
             </div>
             <span className="text-xs font-mono text-zinc-400 font-medium">
@@ -140,11 +144,14 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
           </div>
 
           <h3 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug">
-            Multimodal LLM 기반 UX 휴리스틱 평가 자동화 & 8-Agent 아키텍처 구축
+            {t('Multimodal LLM 기반 UX 휴리스틱 평가 자동화 & 8-Agent 아키텍처 구축', 'Automating UX Heuristic Evaluation with Multimodal LLMs & Building an 8-Agent Architecture')}
           </h3>
           <p className="text-xs sm:text-sm text-zinc-300 mb-6 leading-relaxed max-w-4xl">
-            모바일·가전 UI 스크린샷을 입력받아 맥락을 스스로 이해하고, 8개 전문 에이전트가 협업하여 접근성·일관성·정보구조 등 UX 결함을 자동 검출하는 평가 파이프라인을 구축했습니다.
-            기존 정성적 전문가 리뷰 대비 <strong className="text-amber-400 font-bold">평가 시간 75% 단축</strong> 및 <strong className="text-amber-400 font-bold">휴리스틱 결함 탐지율 92%</strong>를 달성했습니다.
+            {t(
+              '모바일·가전 UI 스크린샷을 입력받아 맥락을 스스로 이해하고, 8개 전문 에이전트가 협업하여 접근성·일관성·정보구조 등 UX 결함을 자동 검출하는 평가 파이프라인을 구축했습니다.',
+              'Built an evaluation pipeline that takes mobile and home-appliance UI screenshots as input, infers their context autonomously, and coordinates eight specialized agents to automatically detect UX issues in accessibility, consistency, information architecture, and more.'
+            )}
+            {t('기존 정성적 전문가 리뷰 대비 ', ' Compared with conventional qualitative expert reviews, it achieved a ')}<strong className="text-amber-400 font-bold">{t('평가 시간 75% 단축', '75% reduction in evaluation time')}</strong>{t(' 및 ', ' and a ')}<strong className="text-amber-400 font-bold">{t('휴리스틱 결함 탐지율 92%', '92% heuristic issue detection rate')}</strong>{t('를 달성했습니다.', '.')}
           </p>
 
           {/* Interactive 8-Agent Visualizer Engine */}
@@ -155,7 +162,7 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
                 <span>8-AGENT MULTIMODAL EVALUATION ORCHESTRATION</span>
               </div>
               <span className="text-zinc-400 text-[11px] font-mono">
-                에이전트를 클릭하여 세부 검증 역할을 확인하세요
+                {t('에이전트를 클릭하여 세부 검증 역할을 확인하세요', 'Click an agent to see its inspection role')}
               </span>
             </div>
 
@@ -231,7 +238,7 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
                 {/* Contributions Checklist */}
                 <div className="rounded-xl bg-zinc-50 p-3.5 mb-4 border border-zinc-200/70">
                   <div className="text-[11px] font-bold text-zinc-700 uppercase tracking-wide mb-2">
-                    주요 연구 내용 및 실증 기여:
+                    {t('주요 연구 내용 및 실증 기여:', 'Key Research & Contributions:')}
                   </div>
                   <ul className="space-y-2">
                     {proj.contributions.map((c, i) => (

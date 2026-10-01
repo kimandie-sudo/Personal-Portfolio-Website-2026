@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Award, Globe, Trophy, Star, ChevronRight, CheckCircle2, Calendar, Sparkles } from 'lucide-react';
-import { CONFERENCES, AWARDS } from '../data/portfolioData';
+import { usePortfolioData, useT } from '../i18n';
 
 export const ConferencesAndAwards: React.FC = () => {
+  const { CONFERENCES, AWARDS } = usePortfolioData();
+  const t = useT();
   const [activeTab, setActiveTab] = useState<'CONF' | 'AWARDS'>('CONF');
   const [intlOnly, setIntlOnly] = useState(false);
 
   const displayedConferences = intlOnly
     ? CONFERENCES.filter((c) => c.isInternational)
     : CONFERENCES;
+  const intlCount = CONFERENCES.filter((c) => c.isInternational).length;
+  const domesticCount = CONFERENCES.length - intlCount;
 
   return (
     <section id="conferences-section" className="w-full mb-12 scroll-mt-24 sm:scroll-mt-28">
@@ -22,10 +26,10 @@ export const ConferencesAndAwards: React.FC = () => {
               <span>CONFERENCE TALKS, PRESENTATIONS & HONORS</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
-              학술대회 구두발표 (12회) & 수상 내역
+              {t(`학술대회 구두발표 (${CONFERENCES.length}회) & 수상 내역`, `Conference Presentations (${CONFERENCES.length}) & Awards`)}
             </h2>
             <p className="text-sm text-zinc-600 mt-1 max-w-3xl">
-              국제 인간공학 및 HCI 학술대회(IEA, AHFE, CHI LBW)와 국내 춘/추계 학술대회 발표, 그리고 과학기술정보통신부 장관상 수상 실적입니다.
+              {t('국제 인간공학 및 HCI 학술대회(IEA, AHFE, CHI LBW)와 국내 춘/추계 학술대회 발표, 그리고 과학기술정보통신부 장관상 수상 실적입니다.', 'Presentations at international human factors and HCI conferences (IEA, AHFE, CHI LBW) and Korean spring/fall conferences, along with honors including the Minister of Science and ICT Award.')}
             </p>
           </div>
 
@@ -39,7 +43,7 @@ export const ConferencesAndAwards: React.FC = () => {
                   : 'text-zinc-600 hover:text-zinc-900'
               }`}
             >
-              학술대회 발표 ({CONFERENCES.length})
+              {t('학술대회 발표', 'Presentations')} ({CONFERENCES.length})
             </button>
             <button
               onClick={() => setActiveTab('AWARDS')}
@@ -49,7 +53,7 @@ export const ConferencesAndAwards: React.FC = () => {
                   : 'text-zinc-600 hover:text-zinc-900'
               }`}
             >
-              수상 및 표창 ({AWARDS.length})
+              {t('수상 및 표창', 'Awards & Honors')} ({AWARDS.length})
             </button>
           </div>
         </div>
@@ -61,7 +65,7 @@ export const ConferencesAndAwards: React.FC = () => {
             {/* Filter banner */}
             <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-xs">
               <div className="font-semibold text-zinc-700">
-                총 {CONFERENCES.length}회 구두 발표 (국제 학술대회 7회, 국내 학술대회 5회)
+                {t(`총 ${CONFERENCES.length}회 구두 발표 (국제 학술대회 ${intlCount}회, 국내 학술대회 ${domesticCount}회)`, `${CONFERENCES.length} oral presentations (${intlCount} international, ${domesticCount} domestic)`)}
               </div>
               <button
                 onClick={() => setIntlOnly(!intlOnly)}
@@ -71,7 +75,9 @@ export const ConferencesAndAwards: React.FC = () => {
                     : 'bg-white text-zinc-700 border border-zinc-200 hover:bg-zinc-100'
                 }`}
               >
-                {intlOnly ? '✓ 국제 학술대회만 보기 (7)' : '전체 보기 (12)'}
+                {intlOnly
+                  ? t(`✓ 국제 학술대회만 보기 (${intlCount})`, `✓ International Only (${intlCount})`)
+                  : t(`전체 보기 (${CONFERENCES.length})`, `Show All (${CONFERENCES.length})`)}
               </button>
             </div>
 
@@ -157,17 +163,17 @@ export const ConferencesAndAwards: React.FC = () => {
                   </h4>
 
                   <p className="text-xs font-semibold text-blue-700 mb-2">
-                    수여기관: {aw.issuer}
+                    {t('수여기관', 'Awarded by')}: {aw.issuer}
                   </p>
 
                   <p className="text-xs text-zinc-600 leading-relaxed bg-zinc-50 p-3 rounded-lg border border-zinc-200/80">
-                    인간공학 및 설명가능 AI 분야에서의 우수한 연구 기여와 실증 프로젝트 성과를 인정받아 수여된 공식 표창입니다.
+                    {t('인간공학 및 설명가능 AI 분야에서의 우수한 연구 기여와 실증 프로젝트 성과를 인정받아 수여된 공식 표창입니다.', 'Official recognition for outstanding research contributions and applied project outcomes in human factors and explainable AI.')}
                   </p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-zinc-100 text-xs text-zinc-500 font-medium flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
-                  <span>공인 수상 실적 검증 완료</span>
+                  <span>{t('공인 수상 실적 검증 완료', 'Verified official award')}</span>
                 </div>
               </div>
             ))}

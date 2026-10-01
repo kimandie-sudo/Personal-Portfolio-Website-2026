@@ -8,7 +8,7 @@ import {
   Mail, 
   ShieldCheck 
 } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { useLang, useT, usePortfolioData } from '../i18n';
 
 interface ModernHeroProps {
   onExplorePublications: () => void;
@@ -29,6 +29,10 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
   onQuickFilter,
   selectedFilter
 }) => {
+  const { lang } = useLang();
+  const t = useT();
+  const { PERSONAL_INFO } = usePortfolioData();
+
   return (
     <section id="overview-section" className="w-full pt-4 pb-8 sm:pt-6 sm:pb-12 scroll-mt-24 sm:scroll-mt-28">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -45,15 +49,15 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
             <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-zinc-100">
               <div className="flex flex-wrap items-center gap-2.5">
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-zinc-100 text-zinc-800 border border-zinc-200">
-                  서울대학교 산업공학과 인간공학 연구실 (LET Lab)
+                  {t('서울대학교 산업공학과 인간공학 연구실 (LET Lab)', 'Human Factors Lab (LET Lab), Dept. of Industrial Engineering, Seoul National University')}
                 </span>
                 <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-blue-50 text-blue-700 border border-blue-100">
-                  박사과정 연구원
+                  {t('박사과정 연구원', 'Ph.D. Candidate')}
                 </span>
               </div>
 
               <div className="text-xs sm:text-sm text-zinc-600 font-medium flex items-center gap-2">
-                <span>지도교수: <strong>{PERSONAL_INFO.advisor}</strong></span>
+                <span>{t('지도교수', 'Advisor')}: <strong>{PERSONAL_INFO.advisor}</strong></span>
                 <span className="text-zinc-300">|</span>
                 <span className="text-zinc-700">{PERSONAL_INFO.location}</span>
               </div>
@@ -64,10 +68,10 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
               <div className="space-y-3">
                 <div className="flex flex-wrap items-baseline gap-3">
                   <h1 className="text-3xl sm:text-5xl font-black text-zinc-900 tracking-normal">
-                    김성민
+                    {lang === 'ko' ? '김성민' : 'Sungmin Kim'}
                   </h1>
                   <span className="text-xl sm:text-2xl font-bold text-zinc-500">
-                    Sungmin Kim
+                    {lang === 'ko' ? 'Sungmin Kim' : '김성민'}
                   </span>
                   <span className="text-xs sm:text-sm font-semibold px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-700 border border-zinc-200">
                     Human Factors & Human-AI Interaction Researcher
@@ -75,12 +79,24 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-zinc-900 leading-tight">
-                  인간의 생체신호 정밀 계측부터 <br className="hidden sm:inline" />
-                  <span className="text-blue-600">설명가능 AI(XAI) 인터페이스</span>까지
+                  {lang === 'ko' ? (
+                    <>
+                      인간의 생체신호 정밀 계측부터 <br className="hidden sm:inline" />
+                      <span className="text-blue-600">설명가능 AI(XAI) 인터페이스</span>까지
+                    </>
+                  ) : (
+                    <>
+                      From precise measurement of human physiological signals <br className="hidden sm:inline" />
+                      to <span className="text-blue-600">explainable AI (XAI) interfaces</span>
+                    </>
+                  )}
                 </h2>
 
                 <p className="text-base sm:text-lg text-zinc-700 font-medium leading-relaxed max-w-3xl">
-                  자율주행 환경의 탑승자 경험(UX)과 멀티에이전트 AI 평가 자동화를 연구하는 서울대학교 인간공학 박사과정 연구원입니다.
+                  {t(
+                    '자율주행 환경의 탑승자 경험(UX)과 멀티에이전트 AI 평가 자동화를 연구하는 서울대학교 인간공학 박사과정 연구원입니다.',
+                    'I am a Ph.D. candidate in Human Factors at Seoul National University, researching passenger experience (UX) in autonomous vehicles and the automation of AI evaluation with multi-agent systems.'
+                  )}
                 </p>
               </div>
 
@@ -90,13 +106,24 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                   <span className="text-blue-600 font-bold text-2xl select-none leading-none">“</span>
                   <div className="space-y-2">
                     <p>
-                      <strong>인간은 복잡하며 섬세합니다.</strong> 그래서 정밀한 다중 생체신호(fNIRS 뇌기능, 시선 추적, 심박변이도 HRV) 계측이 필요합니다.
+                      <strong>{t('인간은 복잡하며 섬세합니다.', 'Humans are complex and nuanced.')}</strong>{' '}
+                      {t(
+                        '그래서 정밀한 다중 생체신호(fNIRS 뇌기능, 시선 추적, 심박변이도 HRV) 계측이 필요합니다.',
+                        'That is why precise multimodal physiological measurement (fNIRS brain activity, eye tracking, heart rate variability) is essential.'
+                      )}
                     </p>
                     <p>
-                      <strong>AI의 판단은 불투명합니다.</strong> 그래서 사용자가 신뢰할 수 있는 설명 인터페이스(XAI)와 인지부하 최적화가 필요합니다.
+                      <strong>{t('AI의 판단은 불투명합니다.', 'AI decisions are opaque.')}</strong>{' '}
+                      {t(
+                        '그래서 사용자가 신뢰할 수 있는 설명 인터페이스(XAI)와 인지부하 최적화가 필요합니다.',
+                        'That is why we need explanation interfaces (XAI) that users can trust, along with optimized cognitive load.'
+                      )}
                     </p>
                     <p className="text-zinc-900 font-bold pt-1">
-                      이 두 영역의 융합을 통해, 인간과 AI가 서로를 이해하고 안전하게 협력할 수 있는 차세대 상호작용 시스템을 설계하고 검증합니다.
+                      {t(
+                        '이 두 영역의 융합을 통해, 인간과 AI가 서로를 이해하고 안전하게 협력할 수 있는 차세대 상호작용 시스템을 설계하고 검증합니다.',
+                        'By bridging these two fields, I design and validate next-generation interaction systems in which humans and AI understand each other and collaborate safely.'
+                      )}
                     </p>
                   </div>
                 </div>
@@ -109,7 +136,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                  주요 연구 및 산학 실적 (클릭 시 해당 상세 섹션으로 바로 이동합니다)
+                  {t('주요 연구 및 산학 실적 (클릭 시 해당 상세 섹션으로 바로 이동합니다)', 'Key research & industry highlights (click to jump to each section)')}
                 </span>
               </div>
 
@@ -126,21 +153,21 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                         <BookOpen className="w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-blue-600 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
-                        <span>내용 보기</span>
+                        <span>{t('내용 보기', 'View')}</span>
                         <ChevronRight className="w-4 h-4" />
                       </span>
                     </div>
                     <div className="text-lg sm:text-xl font-black text-zinc-900 group-hover:text-blue-600 transition-colors">
-                      학술 논문
+                      {t('학술 논문', 'Publications')}
                     </div>
                   </div>
 
                   <div className="mt-3 pt-3 border-t border-zinc-100">
                     <div className="text-sm font-bold text-blue-700">
-                      총 4편 저널 및 학술지
+                      {t('총 4편 저널 및 학술지', '4 journal & conference papers')}
                     </div>
                     <p className="text-xs text-zinc-600 mt-1 leading-snug">
-                      IEEE THMS 1저자 · IJHCI Q1 · CHI LBW
+                      {t('IEEE THMS 1저자 · IJHCI Q1 · CHI LBW', 'IEEE THMS (first author) · IJHCI Q1 · CHI LBW')}
                     </p>
                   </div>
                 </button>
@@ -156,21 +183,21 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                         <Briefcase className="w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-emerald-600 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
-                        <span>내용 보기</span>
+                        <span>{t('내용 보기', 'View')}</span>
                         <ChevronRight className="w-4 h-4" />
                       </span>
                     </div>
                     <div className="text-lg sm:text-xl font-black text-zinc-900 group-hover:text-blue-600 transition-colors">
-                      산학 프로젝트
+                      {t('산학 프로젝트', 'Industry Projects')}
                     </div>
                   </div>
 
                   <div className="mt-3 pt-3 border-t border-zinc-100">
                     <div className="text-sm font-bold text-emerald-700">
-                      총 10건 산학 및 국책 과제
+                      {t('총 10건 산학 및 국책 과제', '10 industry & government-funded projects')}
                     </div>
                     <p className="text-xs text-zinc-600 mt-1 leading-snug">
-                      삼성전자 · 현대자동차그룹 · NRF
+                      {t('삼성전자 · 현대자동차그룹 · NRF', 'Samsung Electronics · Hyundai Motor Group · NRF')}
                     </p>
                   </div>
                 </button>
@@ -186,21 +213,21 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                         <Award className="w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-purple-600 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
-                        <span>내용 보기</span>
+                        <span>{t('내용 보기', 'View')}</span>
                         <ChevronRight className="w-4 h-4" />
                       </span>
                     </div>
                     <div className="text-lg sm:text-xl font-black text-zinc-900 group-hover:text-blue-600 transition-colors">
-                      학술대회 발표
+                      {t('학술대회 발표', 'Conference Talks')}
                     </div>
                   </div>
 
                   <div className="mt-3 pt-3 border-t border-zinc-100">
                     <div className="text-sm font-bold text-purple-700">
-                      총 12회 구두 발표
+                      {t('총 12회 구두 발표', '12 oral presentations')}
                     </div>
                     <p className="text-xs text-zinc-600 mt-1 leading-snug">
-                      국제 7회 (IEA, HFES, CHI) · 국내 5회
+                      {t('국제 7회 (IEA, HFES, CHI) · 국내 5회', '7 international (IEA, HFES, CHI) · 5 domestic')}
                     </p>
                   </div>
                 </button>
@@ -216,21 +243,21 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                         <ShieldCheck className="w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-amber-600 flex items-center gap-0.5 group-hover:translate-x-1 transition-transform">
-                        <span>내용 보기</span>
+                        <span>{t('내용 보기', 'View')}</span>
                         <ChevronRight className="w-4 h-4" />
                       </span>
                     </div>
                     <div className="text-lg sm:text-xl font-black text-zinc-900 group-hover:text-blue-600 transition-colors">
-                      특허 & 수상
+                      {t('특허 & 수상', 'Patents & Awards')}
                     </div>
                   </div>
 
                   <div className="mt-3 pt-3 border-t border-zinc-100">
                     <div className="text-sm font-bold text-amber-700">
-                      장관상 및 특허 2건
+                      {t('장관상 및 특허 2건', 'Ministerial Award & 2 patents')}
                     </div>
                     <p className="text-xs text-zinc-600 mt-1 leading-snug">
-                      과기정통부 장관상 · 특허 출원 2건
+                      {t('과기정통부 장관상 · 특허 출원 2건', 'Minister of Science and ICT Award · 2 patent applications')}
                     </p>
                   </div>
                 </button>
@@ -247,7 +274,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                   className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-xs flex items-center gap-2 transition-all cursor-pointer"
                 >
                   <BookOpen className="w-4 h-4" />
-                  <span>학술 논문 목록 (4편)</span>
+                  <span>{t('학술 논문 목록 (4편)', 'Publications (4)')}</span>
                 </button>
 
                 <button
@@ -255,7 +282,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                   className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   <Briefcase className="w-4 h-4" />
-                  <span>산학협력 프로젝트 (10건)</span>
+                  <span>{t('산학협력 프로젝트 (10건)', 'Industry Projects (10)')}</span>
                 </button>
 
                 <button
@@ -263,13 +290,13 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
                   className="px-5 py-2.5 rounded-xl bg-white hover:bg-blue-50 text-blue-700 border-2 border-blue-200 text-sm font-bold flex items-center gap-2 transition-all cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-blue-600" />
-                  <span>인터랙티브 연구 랩 체험</span>
+                  <span>{t('인터랙티브 연구 랩 체험', 'Try the Interactive Research Lab')}</span>
                 </button>
               </div>
 
               {/* Direct Quick Contact */}
               <div className="flex items-center gap-2 text-sm font-semibold text-zinc-700">
-                <span className="text-xs text-zinc-500">문의 이메일:</span>
+                <span className="text-xs text-zinc-500">{t('문의 이메일:', 'Email:')}</span>
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
                   className="text-blue-600 hover:text-blue-800 flex items-center gap-1.5 font-bold"
@@ -287,14 +314,14 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
         {/* Quick Topic Filter Pill Strip */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold text-zinc-500 mr-1">
-            분야별 모아보기:
+            {t('분야별 모아보기:', 'Browse by topic:')}
           </span>
           {[
-            { id: 'ALL', label: '전체 보기' },
-            { id: 'AV_UX', label: '자율주행 UX 및 멀미저감' },
-            { id: 'XAI', label: '설명가능 AI (XAI) 신뢰 인터페이스' },
-            { id: 'MLLM', label: '삼성 CXI 8-Agent MLLM 평가' },
-            { id: 'BIOMETRIC', label: '생체신호 계측 (fNIRS·아이트래킹)' }
+            { id: 'ALL', label: t('전체 보기', 'All') },
+            { id: 'AV_UX', label: t('자율주행 UX 및 멀미저감', 'Autonomous Vehicle UX & Motion Sickness Mitigation') },
+            { id: 'XAI', label: t('설명가능 AI (XAI) 신뢰 인터페이스', 'Trustworthy Explainable AI (XAI) Interfaces') },
+            { id: 'MLLM', label: t('삼성 CXI 8-Agent MLLM 평가', 'Samsung CXI 8-Agent MLLM Evaluation') },
+            { id: 'BIOMETRIC', label: t('생체신호 계측 (fNIRS·아이트래킹)', 'Physiological Sensing (fNIRS · Eye Tracking)') }
           ].map((pill) => (
             <button
               key={pill.id}
