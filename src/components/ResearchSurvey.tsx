@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { HelpCircle } from 'lucide-react';
 import { useLang, useT } from '../i18n';
 import { SURVEY_FORM, SURVEY_QUESTIONS, SurveyKey } from '../data/surveyConfig';
 
@@ -13,7 +12,7 @@ function readDone() {
   }
 }
 
-export const ResearchSurvey: React.FC<{ footer?: React.ReactNode }> = ({ footer }) => {
+export const ResearchSurvey: React.FC = () => {
   const { lang } = useLang();
   const t = useT();
   const [answers, setAnswers] = useState<Partial<Record<SurveyKey, string>>>({});
@@ -57,14 +56,7 @@ export const ResearchSurvey: React.FC<{ footer?: React.ReactNode }> = ({ footer 
           : t('두 질문에 답한 뒤 제출해 주세요. 익명으로 수집됩니다.', 'Answer both questions, then submit. Responses are anonymous.');
 
   return (
-    <div className="modern-card p-6 bg-white border border-zinc-200 flex flex-col">
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
-        <HelpCircle className="w-4 h-4 text-blue-600" />
-        <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-          {t('짧은 연구 설문', 'Quick Research Survey')}
-        </h3>
-      </div>
-
+    <div className="p-5 sm:p-6 rounded-2xl bg-white border border-zinc-200">
       <form onSubmit={handleSubmit} className="space-y-4 text-xs text-zinc-800">
         {SURVEY_QUESTIONS.map((q, qi) => (
           <fieldset key={q.key} className="space-y-1.5" disabled={locked}>
@@ -106,7 +98,6 @@ export const ResearchSurvey: React.FC<{ footer?: React.ReactNode }> = ({ footer 
         </div>
       </form>
 
-      {footer}
     </div>
   );
 };
