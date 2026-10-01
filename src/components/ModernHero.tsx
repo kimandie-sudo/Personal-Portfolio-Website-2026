@@ -13,21 +13,15 @@ import { useLang, useT, usePortfolioData } from '../i18n';
 interface ModernHeroProps {
   onExplorePublications: () => void;
   onExploreIndustry: () => void;
-  onExploreLab: () => void;
   onExploreConferences: () => void;
   onExplorePatents: () => void;
-  onQuickFilter: (category: string) => void;
-  selectedFilter: string;
 }
 
 export const ModernHero: React.FC<ModernHeroProps> = ({
   onExplorePublications,
   onExploreIndustry,
-  onExploreLab,
   onExploreConferences,
-  onExplorePatents,
-  onQuickFilter,
-  selectedFilter
+  onExplorePatents
 }) => {
   const { lang } = useLang();
   const t = useT();
@@ -138,7 +132,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                  {t('주요 연구 및 산학 실적 (클릭 시 해당 상세 섹션으로 바로 이동합니다)', 'Key research & industry highlights (click to jump to each section)')}
+                  {t('주요 연구 및 산학 실적', 'Key research & industry highlights')}
                 </span>
               </div>
 
@@ -267,76 +261,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
               </div>
             </div>
 
-            {/* Quick Action Navigation Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-zinc-200">
-              
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  onClick={onExplorePublications}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-xs flex items-center gap-2 transition-all cursor-pointer"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span>{t('학술 논문 목록 (4편)', 'Publications (4)')}</span>
-                </button>
-
-                <button
-                  onClick={onExploreIndustry}
-                  className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-bold flex items-center gap-2 transition-all cursor-pointer"
-                >
-                  <Briefcase className="w-4 h-4" />
-                  <span>{t('산학협력 프로젝트 (10건)', 'Industry Projects (10)')}</span>
-                </button>
-
-                <button
-                  onClick={onExploreLab}
-                  className="px-5 py-2.5 rounded-xl bg-white hover:bg-blue-50 text-blue-700 border-2 border-blue-200 text-sm font-bold flex items-center gap-2 transition-all cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4 text-blue-600" />
-                  <span>{t('인터랙티브 연구 랩 체험', 'Try the Interactive Research Lab')}</span>
-                </button>
-              </div>
-
-              {/* Direct Quick Contact */}
-              <div className="flex items-center gap-2 text-sm font-semibold text-zinc-700">
-                <span className="text-xs text-zinc-500">{t('문의 이메일:', 'Email:')}</span>
-                <a
-                  href={`mailto:${PERSONAL_INFO.email}`}
-                  className="text-blue-600 hover:text-blue-800 flex items-center gap-1.5 font-bold"
-                >
-                  <Mail className="w-4 h-4 text-blue-600" />
-                  <span>{PERSONAL_INFO.email}</span>
-                </a>
-              </div>
-
-            </div>
-
           </div>
-        </div>
-
-        {/* Quick Topic Filter Pill Strip */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-zinc-500 mr-1">
-            {t('분야별 모아보기:', 'Browse by topic:')}
-          </span>
-          {[
-            { id: 'ALL', label: t('전체 보기', 'All') },
-            { id: 'AV_UX', label: t('자율주행 UX 및 멀미저감', 'Autonomous Vehicle UX & Motion Sickness Mitigation') },
-            { id: 'XAI', label: t('설명가능 AI (XAI) 신뢰 인터페이스', 'Trustworthy Explainable AI (XAI) Interfaces') },
-            { id: 'MLLM', label: t('삼성 CXI 8-Agent MLLM 평가', 'Samsung CXI 8-Agent MLLM Evaluation') },
-            { id: 'BIOMETRIC', label: t('생체신호 계측 (fNIRS·아이트래킹)', 'Physiological Sensing (fNIRS · Eye Tracking)') }
-          ].map((pill) => (
-            <button
-              key={pill.id}
-              onClick={() => onQuickFilter(pill.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                selectedFilter === pill.id
-                  ? 'bg-blue-600 text-white font-bold shadow-xs'
-                  : 'bg-white text-zinc-700 border border-zinc-200 hover:bg-zinc-100'
-              }`}
-            >
-              {pill.label}
-            </button>
-          ))}
         </div>
 
       </div>

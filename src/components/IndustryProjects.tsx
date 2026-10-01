@@ -66,7 +66,10 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
     }
   ];
 
+  // The Samsung CXI project is shown as the featured card above, so it is left out of the grid
+  const FEATURED_ID = 'samsung-cxi-2025';
   const filteredProjects = INDUSTRY_PROJECTS.filter((proj) => {
+    if (proj.id === FEATURED_ID) return false;
     if (partnerFilter !== 'ALL' && proj.partnerCategory !== partnerFilter) return false;
     if (filterQuery) {
       const q = filterQuery.toLowerCase();
