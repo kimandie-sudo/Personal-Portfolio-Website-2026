@@ -31,7 +31,9 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
 }) => {
   const { lang } = useLang();
   const t = useT();
-  const { PERSONAL_INFO } = usePortfolioData();
+  const { PERSONAL_INFO, CONFERENCES } = usePortfolioData();
+  const intlTalks = CONFERENCES.filter((c) => c.isInternational).length;
+  const domesticTalks = CONFERENCES.length - intlTalks;
 
   return (
     <section id="overview-section" className="w-full pt-4 pb-8 sm:pt-6 sm:pb-12 scroll-mt-24 sm:scroll-mt-28">
@@ -224,10 +226,10 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
 
                   <div className="mt-3 pt-3 border-t border-zinc-100">
                     <div className="text-sm font-bold text-purple-700">
-                      {t('총 12회 구두 발표', '12 oral presentations')}
+                      {t(`총 ${CONFERENCES.length}회 구두 발표`, `${CONFERENCES.length} oral presentations`)}
                     </div>
                     <p className="text-xs text-zinc-600 mt-1 leading-snug">
-                      {t('국제 7회 (IEA, HFES, CHI) · 국내 5회', '7 international (IEA, HFES, CHI) · 5 domestic')}
+                      {t(`국제 ${intlTalks}회 (IEA, HFES, CHI) · 국내 ${domesticTalks}회`, `${intlTalks} international (IEA, HFES, CHI) · ${domesticTalks} domestic`)}
                     </p>
                   </div>
                 </button>

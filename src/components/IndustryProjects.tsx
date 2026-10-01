@@ -102,7 +102,7 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
           </div>
 
           {/* Partner Category Filter Chips */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-zinc-100 p-1 rounded-xl border border-zinc-200 self-start sm:self-auto shrink-0">
+          <div className="flex flex-wrap items-center gap-1.5 bg-zinc-100 p-1 rounded-xl border border-zinc-200 self-start sm:self-auto lg:shrink-0">
             {[
               { id: 'ALL', label: t(`전체 (${INDUSTRY_PROJECTS.length})`, `All (${INDUSTRY_PROJECTS.length})`) },
               { id: 'Samsung', label: t(`삼성전자 그룹 (${countByPartner('Samsung')})`, `Samsung Electronics (${countByPartner('Samsung')})`) },
