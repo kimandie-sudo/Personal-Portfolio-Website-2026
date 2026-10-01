@@ -1,9 +1,9 @@
 // Google Form that stores survey responses.
 // formId: the part after /forms/d/e/ in the form's "pre-filled link" (ends before /viewform).
 // entries: the entry.NNNN ids for each question, taken from the same pre-filled link.
-// While formId is empty the survey is shown but voting is disabled.
+// Until formId and every entry id are set, the survey is shown but voting is disabled.
 export const SURVEY_FORM = {
-  formId: '',
+  formId: '1FAIpQLSeySXOvF8Wq-Z9i4oFJ7xfG9mDTQKozY6VFur03tMgOxSkp1Q',
   entries: {
     activity: '',
     explanation: '',
