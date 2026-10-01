@@ -19,7 +19,7 @@ export const ResearchSurvey: React.FC<{ footer?: React.ReactNode }> = ({ footer 
   const [answers, setAnswers] = useState<Partial<Record<SurveyKey, string>>>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>(readDone() ? 'done' : 'idle');
 
-  const configured = Boolean(SURVEY_FORM.formId);
+  const configured = Boolean(SURVEY_FORM.formId) && SURVEY_QUESTIONS.every((q) => SURVEY_FORM.entries[q.key]);
   const complete = SURVEY_QUESTIONS.every((q) => answers[q.key]);
   const locked = status === 'sending' || status === 'done';
 
