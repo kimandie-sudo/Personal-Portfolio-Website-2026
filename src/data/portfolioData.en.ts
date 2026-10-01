@@ -9,7 +9,6 @@ export const PERSONAL_INFO = {
   affiliationEn: 'Life Enhancement Technology Lab, Seoul National University',
   advisor: 'Prof. Woojin Park',
   email: 'kimandie@snu.ac.kr',
-  phone: '010-9824-3236',
   period: '2020.03 – Present',
   location: 'Seoul, Republic of Korea',
   dissertationTopic: 'A Human Factors Study of Occupant Non-Driving-Related Task Performance and Interaction Modalities in Autonomous Vehicles',

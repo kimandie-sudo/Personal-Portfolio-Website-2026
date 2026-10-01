@@ -4,7 +4,6 @@ import {
   Cpu, 
   Activity, 
   Eye, 
-  HelpCircle, 
   CheckCircle2, 
   BarChart3, 
   Layers, 
@@ -14,6 +13,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { usePortfolioData, useT } from '../i18n';
+import { ResearchSurvey } from './ResearchSurvey';
 
 export const InteractiveLab: React.FC = () => {
   const { EQUIPMENTS } = usePortfolioData();
@@ -26,29 +26,6 @@ export const InteractiveLab: React.FC = () => {
   const [displayModality, setDisplayModality] = useState<'HUD' | 'CenterStack' | 'Tablet'>('HUD');
   const [vmcEnabled, setVmcEnabled] = useState<boolean>(true);
   const [controlModality, setControlModality] = useState<'Voice' | 'Touch' | 'Gesture'>('Voice');
-
-  // Interactive Poll
-  const [pollSelected, setPollSelected] = useState<string>('opt1');
-  const [pollSubmitted, setPollSubmitted] = useState<boolean>(false);
-  const [pollVotes, setPollVotes] = useState<Record<string, number>>({
-    opt1: 54,
-    opt2: 32,
-    opt3: 78,
-    opt4: 41
-  });
-
-  const handleVoteSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!pollSubmitted) {
-      setPollVotes(prev => ({
-        ...prev,
-        [pollSelected]: prev[pollSelected] + 1
-      }));
-      setPollSubmitted(true);
-    }
-  };
-
-  const totalVotes = Object.values(pollVotes).reduce((a: number, b: number) => a + b, 0) || 1;
 
   // Compute VMS & Workload metrics
   const computeVmsScore = () => {
@@ -376,87 +353,18 @@ export const InteractiveLab: React.FC = () => {
             </div>
           </div>
 
-          {/* Live Research Community Poll */}
-          <div className="modern-card p-6 bg-white border border-zinc-200 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-zinc-100">
-                <div className="flex items-center gap-2">
-                  <HelpCircle className="w-4 h-4 text-blue-600" />
-                  <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                    {t('연구 커뮤니티 실시간 서베이', 'Live Research Community Poll')}
-                  </h3>
-                </div>
-                <span className="text-xs font-mono text-zinc-500 font-semibold">
-                  {t(`참여 ${totalVotes}명`, `${totalVotes} votes`)}
-                </span>
-              </div>
-
-              <form onSubmit={handleVoteSubmit} className="space-y-3 text-xs text-zinc-800">
-                <p className="font-bold leading-relaxed text-zinc-900">
-                  {t(
-                    'Q: "자율주행 및 지능형 AI 시스템에서 사용자가 가장 신뢰감을 느끼는 UX 요소는 무엇인가요?"',
-                    'Q: "In automated driving and intelligent AI systems, which UX element makes users feel the most trust?"'
-                  )}
-                </p>
-
-                <div className="space-y-1.5 p-3 rounded-xl bg-zinc-50 border border-zinc-200">
-                  {[
-                    { id: 'opt1', text: t('A. 실시간 주행 궤적 동기화 모션 큐 (VMC)', 'A. Motion cues synchronized with the real-time driving trajectory (VMC)') },
-                    { id: 'opt2', text: t('B. 다중 생체신호 기반 적응형 피드백', 'B. Adaptive feedback based on multimodal physiological signals') },
-                    { id: 'opt3', text: t('C. AI 판단 근거 설명 (XAI 인터페이스)', 'C. Explanations of AI decision rationale (XAI interface)') },
-                    { id: 'opt4', text: t('D. 음성·제스처 멀티모달 상호작용', 'D. Multimodal voice and gesture interaction') },
-                  ].map((opt) => (
-                    <label
-                      key={opt.id}
-                      className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white cursor-pointer transition-colors"
-                    >
-                      <input
-                        type="radio"
-                        name="poll"
-                        value={opt.id}
-                        checked={pollSelected === opt.id}
-                        onChange={() => setPollSelected(opt.id)}
-                        disabled={pollSubmitted}
-                        className="accent-blue-600 cursor-pointer"
-                      />
-                      <span className="flex-1 font-medium text-xs">{opt.text}</span>
-                      {pollSubmitted && (
-                        <span className="font-mono text-xs text-blue-600 font-bold">
-                          {Math.round(((pollVotes[opt.id] || 0) / (totalVotes as number)) * 100)}%
-                        </span>
-                      )}
-                    </label>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs text-zinc-500 font-medium">
-                    {pollSubmitted ? t('✓ 투표에 참여해 주셔서 감사합니다!', '✓ Thank you for voting!') : t('항목을 선택 후 투표해 주세요.', 'Select an option and cast your vote.')}
+          {/* Research Survey (responses go to a Google Form) */}
+          <ResearchSurvey
+            footer={
+                <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-600">
+                  <span className="flex items-center gap-1.5 font-semibold text-zinc-800">
+                    <Calendar className="w-3.5 h-3.5 text-blue-600" />
+                    {t('2027.02 서울대학교 산업공학 박사 졸업 예정', 'Expected Ph.D. in Industrial Engineering, Seoul National University (Feb. 2027)')}
                   </span>
-                  <button
-                    type="submit"
-                    disabled={pollSubmitted}
-                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      pollSubmitted
-                        ? 'bg-zinc-200 text-zinc-500 cursor-not-allowed'
-                        : 'bg-blue-600 hover:bg-blue-700 text-white shadow-xs'
-                    }`}
-                  >
-                    {pollSubmitted ? t('투표 완료', 'Voted') : t('투표하기', 'Vote')}
-                  </button>
+                  <span className="text-blue-600 font-bold font-mono">D-Defense 2026-2027</span>
                 </div>
-              </form>
-            </div>
-
-            {/* Ph.D. Milestone Highlight */}
-            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-600">
-              <span className="flex items-center gap-1.5 font-semibold text-zinc-800">
-                <Calendar className="w-3.5 h-3.5 text-blue-600" />
-                {t('2027.02 서울대학교 산업공학 박사 졸업 예정', 'Expected Ph.D. in Industrial Engineering, Seoul National University (Feb. 2027)')}
-              </span>
-              <span className="text-blue-600 font-bold font-mono">D-Defense 2026-2027</span>
-            </div>
-          </div>
+            }
+          />
 
         </div>
 
