@@ -1,12 +1,16 @@
 import React from 'react';
 import { Mail, ArrowUp, MapPin, Phone } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { useLang, useT, usePortfolioData } from '../i18n';
 
 interface ModernFooterProps {
   onOpenDesignSpecs?: () => void;
 }
 
 export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs }) => {
+  const { lang } = useLang();
+  const t = useT();
+  const { PERSONAL_INFO } = usePortfolioData();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,16 +29,16 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="font-black text-lg sm:text-xl text-zinc-900">
-                  김성민
+                  {lang === 'ko' ? '김성민' : 'Sungmin Kim'}
                 </span>
                 <span className="font-semibold text-sm text-zinc-500">
-                  Sungmin Kim
+                  {lang === 'ko' ? 'Sungmin Kim' : '김성민'}
                 </span>
               </div>
             </div>
 
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed max-w-lg">
-              {PERSONAL_INFO.affiliationKo}<br />
+              {lang === 'ko' ? PERSONAL_INFO.affiliationKo : PERSONAL_INFO.affiliationEn}<br />
               <span className="text-blue-600 font-semibold">{PERSONAL_INFO.dissertationTopic}</span>
             </p>
 
@@ -43,7 +47,7 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
                 <MapPin className="w-3.5 h-3.5 text-zinc-400" />
                 {PERSONAL_INFO.location}
               </span>
-              <span>지도교수: <strong>{PERSONAL_INFO.advisor}</strong></span>
+              <span>{t('지도교수', 'Advisor')}: <strong>{PERSONAL_INFO.advisor}</strong></span>
             </div>
           </div>
 
@@ -53,7 +57,7 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
               CONTACT & COLLABORATION
             </div>
             <p className="text-xs text-zinc-600">
-              산학 연구, 포스닥/연구원 포지션 및 학술 협업 문의:
+              {t('산학 연구, 포스닥/연구원 포지션 및 학술 협업 문의:', 'For industry research, postdoc/researcher positions, and academic collaboration:')}
             </p>
             <div className="space-y-1.5 pt-1">
               <a
@@ -76,13 +80,13 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
                 QUICK NAVIGATION
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-                <a href="#overview-section" className="hover:text-blue-600">소개</a>
-                <a href="#patents-bio-section" className="hover:text-blue-600">학력·특허</a>
-                <a href="#pillars-section" className="hover:text-blue-600">연구 분야</a>
-                <a href="#publications-section" className="hover:text-blue-600">학술 논문 (4)</a>
-                <a href="#industry-section" className="hover:text-blue-600">산학 프로젝트 (10)</a>
-                <a href="#conferences-section" className="hover:text-blue-600">학술발표·수상</a>
-                <a href="#interactive-lab-section" className="hover:text-blue-600">체험 랩</a>
+                <a href="#overview-section" className="hover:text-blue-600">{t('소개', 'About')}</a>
+                <a href="#patents-bio-section" className="hover:text-blue-600">{t('학력·특허', 'Education & Patents')}</a>
+                <a href="#pillars-section" className="hover:text-blue-600">{t('연구 분야', 'Research')}</a>
+                <a href="#publications-section" className="hover:text-blue-600">{t('학술 논문 (4)', 'Publications (4)')}</a>
+                <a href="#industry-section" className="hover:text-blue-600">{t('산학 프로젝트 (10)', 'Industry Projects (10)')}</a>
+                <a href="#conferences-section" className="hover:text-blue-600">{t('학술발표·수상', 'Talks & Awards')}</a>
+                <a href="#interactive-lab-section" className="hover:text-blue-600">{t('체험 랩', 'Interactive Lab')}</a>
               </div>
             </div>
 
@@ -91,7 +95,7 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
               className="self-start px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <ArrowUp className="w-3.5 h-3.5" />
-              <span>맨 위로 이동</span>
+              <span>{t('맨 위로 이동', 'Back to top')}</span>
             </button>
           </div>
 
@@ -100,7 +104,7 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
         {/* Bottom copyright row */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
           <p>
-            © 2026 김성민 (Sungmin Kim). Seoul National University LET Lab.
+            {t('© 2026 김성민 (Sungmin Kim). Seoul National University LET Lab.', '© 2026 Sungmin Kim (김성민). Seoul National University LET Lab.')}
           </p>
           <div className="flex items-center gap-4">
             <span className="font-mono text-[11px] text-zinc-400">Typography: Pretendard & Plus Jakarta Sans</span>

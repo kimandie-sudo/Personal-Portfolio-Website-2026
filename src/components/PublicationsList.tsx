@@ -11,7 +11,7 @@ import {
   FileText,
   Bookmark
 } from 'lucide-react';
-import { PUBLICATIONS } from '../data/portfolioData';
+import { usePortfolioData, useT } from '../i18n';
 import { Publication } from '../types';
 
 interface PublicationsListProps {
@@ -19,6 +19,8 @@ interface PublicationsListProps {
 }
 
 export const PublicationsList: React.FC<PublicationsListProps> = ({ filterQuery = '' }) => {
+  const { PUBLICATIONS } = usePortfolioData();
+  const t = useT();
   const [filterType, setFilterType] = useState<'ALL' | '1st' | 'Q1'>('ALL');
   const [expandedAbstracts, setExpandedAbstracts] = useState<Record<string, boolean>>({
     'thms-2026': true, // Open by default for top 1st author paper
@@ -70,18 +72,18 @@ export const PublicationsList: React.FC<PublicationsListProps> = ({ filterQuery 
               <span>PEER-REVIEWED JOURNAL & CONFERENCE PUBLICATIONS</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
-              학술 논문 및 게재 성과 (총 {PUBLICATIONS.length}편)
+              {t(`학술 논문 및 게재 성과 (총 ${PUBLICATIONS.length}편)`, `Publications (${PUBLICATIONS.length} papers)`)}
             </h2>
             <p className="text-sm text-zinc-600 mt-1 max-w-3xl">
-              IEEE Transactions, IJHCI, ACM CHI, Applied Ergonomics 등 인간공학 및 인간-컴퓨터 상호작용(HCI) 분야 최상위 저널에 게재된 연구 논문 목록입니다.
+              {t('IEEE Transactions, IJHCI, ACM CHI, Applied Ergonomics 등 인간공학 및 인간-컴퓨터 상호작용(HCI) 분야 최상위 저널에 게재된 연구 논문 목록입니다.', 'Research papers published in leading venues in human factors and human-computer interaction (HCI), including IEEE Transactions, IJHCI, ACM CHI, and Applied Ergonomics.')}
             </p>
           </div>
 
           {/* Filter Chips */}
           <div className="flex items-center gap-1.5 bg-zinc-100 p-1 rounded-xl border border-zinc-200 self-start sm:self-auto shrink-0">
             {[
-              { id: 'ALL', label: `전체 (${PUBLICATIONS.length})` },
-              { id: '1st', label: '제1저자 논문 (1st Author)' },
+              { id: 'ALL', label: t(`전체 (${PUBLICATIONS.length})`, `All (${PUBLICATIONS.length})`) },
+              { id: '1st', label: t('제1저자 논문 (1st Author)', 'First-Author Papers') },
               { id: 'Q1', label: 'JCR Q1 Top Tier' },
             ].map((tab) => (
               <button
@@ -161,13 +163,13 @@ export const PublicationsList: React.FC<PublicationsListProps> = ({ filterQuery 
                   <div className="flex items-center justify-between text-xs font-bold text-zinc-700 mb-1.5">
                     <span className="flex items-center gap-1.5">
                       <FileText className="w-3.5 h-3.5 text-blue-600" />
-                      연구 개요 & 핵심 기여 (Abstract & Key Findings)
+                      {t('연구 개요 & 핵심 기여 (Abstract & Key Findings)', 'Abstract & Key Findings')}
                     </span>
                     <button
                       onClick={() => toggleAbstract(pub.id)}
                       className="text-blue-600 hover:text-blue-800 text-xs font-semibold flex items-center gap-0.5 cursor-pointer"
                     >
-                      <span>{isExpanded ? '간략히 접기' : '전체 초록 보기'}</span>
+                      <span>{isExpanded ? t('간략히 접기', 'Show less') : t('전체 초록 보기', 'Read full abstract')}</span>
                       {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                     </button>
                   </div>
@@ -199,17 +201,17 @@ export const PublicationsList: React.FC<PublicationsListProps> = ({ filterQuery 
                     <button
                       onClick={() => handleCopyCitation(pub)}
                       className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-                      title="인용 양식 복사"
+                      title={t('인용 양식 복사', 'Copy citation')}
                     >
                       {copiedId === pub.id ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-600" />
-                          <span className="text-emerald-700 font-bold">복사 완료!</span>
+                          <span className="text-emerald-700 font-bold">{t('복사 완료!', 'Copied!')}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>인용 복사</span>
+                          <span>{t('인용 복사', 'Copy Citation')}</span>
                         </>
                       )}
                     </button>
