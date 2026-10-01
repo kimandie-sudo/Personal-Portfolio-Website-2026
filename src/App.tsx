@@ -14,33 +14,9 @@ import { useT } from './i18n';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('overview');
-  const [selectedFilter, setSelectedFilter] = useState<string>('ALL');
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [showSpecsModal, setShowSpecsModal] = useState<boolean>(false);
   const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
   const t = useT();
-
-  // Clean Web Audio feedback
-  const playClickSound = (freq = 880, duration = 0.04) => {
-    if (!soundEnabled) return;
-    try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime);
-      gain.gain.setValueAtTime(0.015, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + duration);
-    } catch (e) {
-      // Audio context may be restricted before interaction
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +31,6 @@ export default function App() {
   }, []);
 
   const handleNavigate = (sectionId: string) => {
-    playClickSound(950, 0.04);
     setActiveSection(sectionId);
     if (sectionId === 'overview') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,22 +49,6 @@ export default function App() {
     }
   };
 
-  const handleQuickFilter = (category: string) => {
-    playClickSound(1050, 0.05);
-    setSelectedFilter(category);
-    if (category === 'ALL') {
-      // Show all
-    } else if (category === 'AV_UX') {
-      handleNavigate('publications');
-    } else if (category === 'XAI') {
-      handleNavigate('publications');
-    } else if (category === 'MLLM') {
-      handleNavigate('industry');
-    } else if (category === 'BIOMETRIC') {
-      handleNavigate('interactive-lab');
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#fafafa] text-zinc-900 flex flex-col justify-between selection:bg-blue-600 selection:text-white">
       
@@ -97,8 +56,6 @@ export default function App() {
       <ModernNav
         activeSection={activeSection}
         onNavigate={handleNavigate}
-        soundEnabled={soundEnabled}
-        setSoundEnabled={setSoundEnabled}
         onOpenSpecsModal={() => setShowSpecsModal(true)}
       />
 
@@ -109,18 +66,15 @@ export default function App() {
         <ModernHero
           onExplorePublications={() => handleNavigate('publications')}
           onExploreIndustry={() => handleNavigate('industry')}
-          onExploreLab={() => handleNavigate('interactive-lab')}
           onExploreConferences={() => handleNavigate('conferences')}
           onExplorePatents={() => handleNavigate('patents-bio')}
-          onQuickFilter={handleQuickFilter}
-          selectedFilter={selectedFilter}
         />
 
         {/* 2) 소개 바로 다음: 학력 및 특허 (Patents, Academic Background & Languages) */}
         <PatentsAndEducation />
 
         {/* 3) 연구 분야 (3 Core Research Pillars) */}
-        <ResearchPillars onSelectTopic={handleQuickFilter} />
+        <ResearchPillars />
 
         {/* 4) 학술 논문 목록 (Publications List) */}
         <PublicationsList />
@@ -140,7 +94,6 @@ export default function App() {
       {showBackToTop && (
         <button
           onClick={() => {
-            playClickSound(750, 0.04);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-zinc-900 hover:bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-all duration-200 border border-zinc-700"

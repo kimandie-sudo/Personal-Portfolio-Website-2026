@@ -163,7 +163,7 @@ export const PublicationsList: React.FC<PublicationsListProps> = ({ filterQuery 
                   <div className="flex items-center justify-between text-xs font-bold text-zinc-700 mb-1.5">
                     <span className="flex items-center gap-1.5">
                       <FileText className="w-3.5 h-3.5 text-blue-600" />
-                      {t('연구 개요 & 핵심 기여 (Abstract & Key Findings)', 'Abstract & Key Findings')}
+                      {t('연구 개요 & 핵심 기여', 'Abstract & Key Findings')}
                     </span>
                     <button
                       onClick={() => toggleAbstract(pub.id)}

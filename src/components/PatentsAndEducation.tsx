@@ -16,7 +16,7 @@ export const PatentsAndEducation: React.FC = () => {
             <span>ACADEMIC BACKGROUND & GLOBAL COMPETENCY</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mb-6">
-            {t('학력 및 글로벌 역량 (Academic Background & Languages)', 'Academic Background & Languages')}
+            {t('학력 및 글로벌 역량', 'Academic Background & Languages')}
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -27,7 +27,7 @@ export const PatentsAndEducation: React.FC = () => {
                 <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
                   <GraduationCap className="w-4 h-4 text-blue-600" />
                   <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                    {t('학력 (Education)', 'Education')}
+                    {t('학력', 'Education')}
                   </h3>
                 </div>
 
@@ -72,7 +72,7 @@ export const PatentsAndEducation: React.FC = () => {
                 <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
                   <Languages className="w-4 h-4 text-blue-600" />
                   <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                    {t('글로벌 어학 역량 (Global Languages)', 'Global Languages')}
+                    {t('글로벌 어학 역량', 'Global Languages')}
                   </h3>
                 </div>
 
@@ -88,30 +88,6 @@ export const PatentsAndEducation: React.FC = () => {
                       </span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              {/* Research Methodology Summary Card */}
-              <div className="modern-card p-6 bg-blue-50/50 border border-blue-100">
-                <div className="flex items-center gap-2 mb-3 pb-2 border-b border-blue-200/60">
-                  <Sparkles className="w-4 h-4 text-blue-600" />
-                  <h3 className="text-xs font-bold text-blue-900 uppercase tracking-wide">
-                    {t('핵심 연구 방법론 & 분석 도구', 'Core Research Methods & Analytical Tools')}
-                  </h3>
-                </div>
-                <div className="space-y-2 text-xs text-zinc-700 leading-relaxed">
-                  <div className="flex items-start gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>{t('생체신호 계측:', 'Physiological Sensing:')}</strong> {t('Tobii Pro Glasses 3 시선 추적, Artinis OctaMon+ fNIRS 뇌혈류 분석, HRV 심박변이도', 'Tobii Pro Glasses 3 eye tracking, Artinis OctaMon+ fNIRS cerebral hemodynamics, HRV (heart rate variability)')}</span>
-                  </div>
-                  <div className="flex items-start gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>{t('통계 모델링:', 'Statistical Modeling:')}</strong> {t('R / Python 기반 선형혼합모형(LMER), Repeated Measures ANOVA, 시계열 평활화', 'Linear mixed-effects models (LMER), repeated-measures ANOVA, and time-series smoothing in R / Python')}</span>
-                  </div>
-                  <div className="flex items-start gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                    <span><strong>{t('인공지능 & UX:', 'AI & UX:')}</strong> {t('Multi-Agent LLM 오케스트레이션, SHAP/LIME 설명가능 AI(XAI)', 'Multi-agent LLM orchestration, SHAP/LIME explainable AI (XAI)')}</span>
-                  </div>
                 </div>
               </div>
 

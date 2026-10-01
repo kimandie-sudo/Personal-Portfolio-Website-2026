@@ -8,8 +8,6 @@ import {
   Mail, 
   Menu, 
   X,
-  Volume2,
-  VolumeX,
   FileText
 } from 'lucide-react';
 import { useLang, useT, usePortfolioData } from '../i18n';
@@ -17,16 +15,12 @@ import { useLang, useT, usePortfolioData } from '../i18n';
 interface ModernNavProps {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
-  soundEnabled: boolean;
-  setSoundEnabled: (enabled: boolean) => void;
   onOpenSpecsModal: () => void;
 }
 
 export const ModernNav: React.FC<ModernNavProps> = ({
   activeSection,
   onNavigate,
-  soundEnabled,
-  setSoundEnabled,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { lang, setLang } = useLang();
@@ -106,7 +100,7 @@ export const ModernNav: React.FC<ModernNavProps> = ({
             })}
           </nav>
 
-          {/* Right: Sound toggle & Contact Button */}
+          {/* Right: Language toggle & Contact Button */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
 
             {/* Language Toggle (KO | EN) — always visible on desktop & mobile */}
@@ -137,20 +131,6 @@ export const ModernNav: React.FC<ModernNavProps> = ({
                 );
               })}
             </div>
-
-            {/* Sound Toggle */}
-            <button
-              onClick={() => setSoundEnabled(!soundEnabled)}
-              className="p-2 sm:p-2.5 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors cursor-pointer border border-zinc-200"
-              title={soundEnabled ? t('효과음 켜짐', 'Sound effects on') : t('효과음 꺼짐', 'Sound effects off')}
-              aria-label={soundEnabled ? t('효과음 끄기', 'Turn sound effects off') : t('효과음 켜기', 'Turn sound effects on')}
-            >
-              {soundEnabled ? (
-                <Volume2 className="w-4 h-4 text-blue-600" />
-              ) : (
-                <VolumeX className="w-4 h-4 text-zinc-400" />
-              )}
-            </button>
 
             {/* Direct Email Action Button */}
             <a

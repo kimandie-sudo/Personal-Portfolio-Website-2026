@@ -357,7 +357,7 @@ export const InteractiveLab: React.FC = () => {
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100">
               <Eye className="w-4 h-4 text-blue-600" />
               <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                {t('실험실 정밀 측정 장비 스택 (Lab Equipment)', 'Lab Precision Measurement Equipment')}
+                {t('실험실 정밀 측정 장비', 'Lab Precision Measurement Equipment')}
               </h3>
             </div>
 

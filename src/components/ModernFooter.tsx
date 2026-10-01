@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, ArrowUp, MapPin, Phone } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { useLang, useT, usePortfolioData } from '../i18n';
 
 interface ModernFooterProps {
@@ -10,10 +10,6 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
   const { lang } = useLang();
   const t = useT();
   const { PERSONAL_INFO } = usePortfolioData();
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <footer className="w-full bg-white border-t border-zinc-200 mt-16 pt-12 pb-8 text-zinc-600">
@@ -41,18 +37,10 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
               {lang === 'ko' ? PERSONAL_INFO.affiliationKo : PERSONAL_INFO.affiliationEn}<br />
               <span className="text-blue-600 font-semibold">{PERSONAL_INFO.dissertationTopic}</span>
             </p>
-
-            <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-zinc-600 pt-1">
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                {PERSONAL_INFO.location}
-              </span>
-              <span>{t('지도교수', 'Advisor')}: <strong>{PERSONAL_INFO.advisor}</strong></span>
-            </div>
           </div>
 
-          {/* Col 2: Direct Contact (3 cols) */}
-          <div className="md:col-span-3 space-y-2">
+          {/* Col 2: Direct Contact (6 cols) */}
+          <div className="md:col-span-6 md:justify-self-end space-y-2">
             <div className="text-xs font-bold text-zinc-900 mb-2">
               CONTACT & COLLABORATION
             </div>
@@ -73,32 +61,6 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
             </div>
           </div>
 
-          {/* Col 3: Quick Navigation & Back to Top (3 cols) */}
-          <div className="md:col-span-3 space-y-3 flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-bold text-zinc-900 mb-2">
-                QUICK NAVIGATION
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-xs font-medium">
-                <a href="#overview-section" className="hover:text-blue-600">{t('소개', 'About')}</a>
-                <a href="#patents-bio-section" className="hover:text-blue-600">{t('학력·특허', 'Education & Patents')}</a>
-                <a href="#pillars-section" className="hover:text-blue-600">{t('연구 분야', 'Research')}</a>
-                <a href="#publications-section" className="hover:text-blue-600">{t('학술 논문 (4)', 'Publications (4)')}</a>
-                <a href="#industry-section" className="hover:text-blue-600">{t('산학 프로젝트 (10)', 'Industry Projects (10)')}</a>
-                <a href="#conferences-section" className="hover:text-blue-600">{t('학술발표·수상', 'Talks & Awards')}</a>
-                <a href="#interactive-lab-section" className="hover:text-blue-600">{t('체험 랩', 'Interactive Lab')}</a>
-              </div>
-            </div>
-
-            <button
-              onClick={scrollToTop}
-              className="self-start px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-            >
-              <ArrowUp className="w-3.5 h-3.5" />
-              <span>{t('맨 위로 이동', 'Back to top')}</span>
-            </button>
-          </div>
-
         </div>
 
         {/* Bottom copyright row */}
@@ -106,9 +68,6 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
           <p>
             {t('© 2026 김성민 (Sungmin Kim). Seoul National University LET Lab.', '© 2026 Sungmin Kim (김성민). Seoul National University LET Lab.')}
           </p>
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[11px] text-zinc-400">Typography: Pretendard & Plus Jakarta Sans</span>
-          </div>
         </div>
 
       </div>
