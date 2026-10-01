@@ -151,7 +151,7 @@ export const IndustryProjects: React.FC<IndustryProjectsProps> = ({ filterQuery 
               '모바일·가전 UI 스크린샷을 입력받아 맥락을 스스로 이해하고, 8개 전문 에이전트가 협업하여 접근성·일관성·정보구조 등 UX 결함을 자동 검출하는 평가 파이프라인을 구축했습니다.',
               'Built an evaluation pipeline that takes mobile and home-appliance UI screenshots as input, infers their context autonomously, and coordinates eight specialized agents to automatically detect UX issues in accessibility, consistency, information architecture, and more.'
             )}
-            {t('기존 정성적 전문가 리뷰 대비 ', ' Compared with conventional qualitative expert reviews, it achieved a ')}<strong className="text-amber-400 font-bold">{t('평가 시간 75% 단축', '75% reduction in evaluation time')}</strong>{t(' 및 ', ' and a ')}<strong className="text-amber-400 font-bold">{t('휴리스틱 결함 탐지율 92%', '92% heuristic issue detection rate')}</strong>{t('를 달성했습니다.', '.')}
+            {t(' 기존 정성적 전문가 리뷰 대비 ', ' Compared with conventional qualitative expert reviews, it achieved a ')}<strong className="text-amber-400 font-bold">{t('평가 시간 75% 단축', '75% reduction in evaluation time')}</strong>{t(' 및 ', ' and a ')}<strong className="text-amber-400 font-bold">{t('휴리스틱 결함 탐지율 92%', '92% heuristic issue detection rate')}</strong>{t('를 달성했습니다.', '.')}
           </p>
 
           {/* Interactive 8-Agent Visualizer Engine */}
