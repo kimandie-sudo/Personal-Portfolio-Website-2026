@@ -9,6 +9,7 @@ export const PERSONAL_INFO = {
   affiliationEn: 'Life Enhancement Technology Lab, Seoul National University',
   advisor: 'Prof. Woojin Park',
   email: 'kimandie@snu.ac.kr',
+  linkedin: 'https://www.linkedin.com/in/sungmin-kim-3bb2a8188/',
   period: '2020.03 – Present',
   location: 'Seoul, Republic of Korea',
   dissertationTopic: 'A Human Factors Study of Occupant Non-Driving-Related Task Performance and Interaction Modalities in Autonomous Vehicles',

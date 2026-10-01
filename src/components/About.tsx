@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
 import { useLang, useT, usePortfolioData } from '../i18n';
 
 export const About: React.FC = () => {
@@ -72,7 +72,7 @@ export const About: React.FC = () => {
         ))}
       </ul>
 
-      <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3">
         <a
           href={`mailto:${PERSONAL_INFO.email}`}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold transition-colors"
@@ -80,7 +80,16 @@ export const About: React.FC = () => {
           <Mail className="w-4 h-4" />
           {PERSONAL_INFO.email}
         </a>
-        <p className="text-sm text-zinc-500">
+        <a
+          href={PERSONAL_INFO.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 text-sm font-bold transition-colors"
+        >
+          <Linkedin className="w-4 h-4 text-[#0a66c2]" />
+          LinkedIn
+        </a>
+        <p className="basis-full mt-1 text-sm text-zinc-500">
           {stats.map((s, i) => (
             <span key={s.label}>
               {i > 0 && ' · '}
