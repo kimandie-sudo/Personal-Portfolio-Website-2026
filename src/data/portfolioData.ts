@@ -9,7 +9,6 @@ export const PERSONAL_INFO = {
   affiliationEn: 'Life Enhancement Technology Lab, Seoul National University',
   advisor: '박우진 교수 (Prof. Woojin Park)',
   email: 'kimandie@snu.ac.kr',
-  phone: '010-9824-3236',
   period: '2020.03 – 현재',
   location: 'Seoul, Republic of Korea',
   dissertationTopic: '자율주행 환경에서 탑승자 비운전과업 수행 및 상호작용 방식에 관한 인간공학적 연구',

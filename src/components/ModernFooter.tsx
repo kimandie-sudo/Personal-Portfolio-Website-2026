@@ -55,9 +55,6 @@ export const ModernFooter: React.FC<ModernFooterProps> = ({ onOpenDesignSpecs })
                 <Mail className="w-4 h-4 text-blue-600 shrink-0" />
                 <span>{PERSONAL_INFO.email}</span>
               </a>
-              <p className="text-xs text-zinc-500 font-mono">
-                {PERSONAL_INFO.phone}
-              </p>
             </div>
           </div>
 
